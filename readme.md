@@ -3,7 +3,7 @@
 ## Table of Contents
 1. [Introduction](#Introduction)
 2. [Building the application](#Build)
-3. [Accessing the API via Postman](#Postman)
+3. [Accessing the API via  the browser using Swagger](#Postman)
 4. [Exercises](#Exercises)
     1.  [Exercise 1 - Find users of the app and their password](#Exercise_1)
      1. [Exercise 3 - Change another user's password](#Exercise_3)
