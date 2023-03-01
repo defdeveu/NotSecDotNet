@@ -2,6 +2,8 @@
 using NotSecDotNet.Dto;
 using NotSecDotNet.Model;
 using System.Linq;
+using System.Net;
+using System.Web;
 using System.Xml;
 
 namespace NotSecDotNet.Services
@@ -18,7 +20,7 @@ namespace NotSecDotNet.Services
         public String ChangePassword(String pwdChangeXML)
         {
             try
-            {
+            {  
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(pwdChangeXML);
                 String name = doc.SelectSingleNode("user/userName").InnerText;
@@ -27,9 +29,6 @@ namespace NotSecDotNet.Services
                 usr.Password = newPwd;
                 movieDbContext.SaveChanges();
                 return "Passwrod changed";
-
-               
-
             }
             catch (Exception e)
             {
