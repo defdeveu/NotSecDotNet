@@ -33,9 +33,6 @@ namespace NotSecDotNet.Controllers
         {
             IQueryable<Movie> query = _dbContext.Movies;
             StringBuilder sb = new StringBuilder("select * from Movies where 1=1");
-            string s = $@"ab
-                    cdef
-                    ghijk{id}";
             if (!String.IsNullOrEmpty(title))
             {
                 sb.Append($" and Title like '%{title}%'");

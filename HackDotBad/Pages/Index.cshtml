@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<script>
+    function checkId(name) {
+        const script = document.createElement('script');
+        script.src = `https://localhost:7018/user/profile/${name}`;
+        script.onload = () => {
+            console.log(`Logged user id: ${name}`);
+            document.querySelector("#userDiv").innerText = name;
+        };
+        document.body.appendChild(script);
+    }
+
+    const names = ["Yoda", "Darth Vader", "Princess Leia"];
+
+    for (const name of names) {
+        checkId(name);
+    }
+</script>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Click <a href="https://localhost:7018/logout">here</a> if the force is with you</p>
+    <p>Trust me dear <span id="userDiv"></span>!</p>
+</div>

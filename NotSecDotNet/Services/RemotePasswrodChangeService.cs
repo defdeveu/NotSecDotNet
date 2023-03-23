@@ -3,14 +3,18 @@ using NotSecDotNet.Dto;
 using NotSecDotNet.Model;
 using System.Linq;
 using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Xml;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NotSecDotNet.Services
 {
     public class RemotePasswrodChangeService
     {
         MovieDbContext movieDbContext;
+
         public RemotePasswrodChangeService(MovieDbContext movieDbContext)
         {
             this.movieDbContext = movieDbContext;
@@ -34,6 +38,12 @@ namespace NotSecDotNet.Services
             {
                 return "No such user";
             }
+
+        }
+
+        public static String ReadFileContent(String fileName)
+        {
+            return File.ReadAllText(@"C:\Users\john\tmp" + fileName);
         }
 
     }

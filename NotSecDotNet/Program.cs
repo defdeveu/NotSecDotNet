@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NotSecDotNet.Data;
 using NotSecDotNet.model;
+using NotSecDotNet.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<MovieDbContext>(options => options.UseSqlite("Data Source=movie.db"));
-
+builder.Services.AddAuthentication("cookie")
+    .AddCookie("cookie");
 
 var app = builder.Build();
 
@@ -24,6 +27,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

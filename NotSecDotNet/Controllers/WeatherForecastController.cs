@@ -1,9 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NotSecDotNet.Data;
 using NotSecDotNet.model;
+using System.Text;
 
 namespace NotSecDotNet.Controllers
 {
+    [Authorize]
     [ApiController]
     public class WeatherForecastController : ControllerBase
     {
@@ -33,6 +37,15 @@ namespace NotSecDotNet.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [Route("paramtry")]
+        [HttpGet]
+        public String GetMovies(
+            [FromQuery] string? title,
+            [FromQuery] string? description)
+        {  
+            return title;
         }
 
     }
