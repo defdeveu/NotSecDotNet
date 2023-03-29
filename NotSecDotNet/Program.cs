@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NotSecDotNet.Data;
 using NotSecDotNet.model;
 using NotSecDotNet.Model;
+using NotSecDotNet.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MovieDbContext>(options => options.UseSqlite("Data Source=movie.db"));
 builder.Services.AddAuthentication("cookie")
     .AddCookie("cookie");
+builder.Services.AddRazorPages();
+builder.Services.AddScoped<MovieService>();
 
 var app = builder.Build();
 
@@ -33,6 +36,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseStaticFiles();
+
+app.MapRazorPages();
 
 app.Run();
 

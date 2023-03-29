@@ -1,0 +1,81 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="">
+    <h1 class="display-4">Movie fans may the force be with you!</h1>
+    <div class="row border bg-light">
+        <div class="col-md-12">
+            <form method="post">
+                <div class="form-floating mb-3 mt-3">
+
+                    <input asp-for="Title" class="form-control" placeholder="Title" />
+                    <label asp-for="Title" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3 mt-3">
+
+                    <input asp-for="Desc" class="form-control" placeholder="Desc" />
+                    <label asp-for="Desc" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3 mt-3">
+                    <button type="submit" value="Search" class="btn btn-primary">Search</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    @if (Model.Movies != null && Model.Movies.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Movies != null )
+                {
+                    foreach (var movie in Model.Movies)
+                    {
+                        <tr>
+                            <td>@movie.Id</td>
+                            <td>@movie.Title</td>
+                            <td>@movie.Genre</td>
+                            <td>@movie.Description</td>
+
+                        </tr>
+                    }
+                }
+
+            </tbody>
+
+        </table>
+
+    }
+    @if (Model.Movies == null || Model.Movies.Count == 0)
+    {
+        <div id="nodata">No data for your search</div>
+    }
+
+    <script>
+        function detailedEmptyMessage(){
+            var emptyDiv = document.querySelector('#nodata');
+            if (emptyDiv) {
+                var span = document.createElement('span');
+                var title = document.querySelector('#Title').value;
+                var desc = document.querySelector('#Desc').value;
+                span.innerHTML = `: title: ${title}, description: ${desc}`;
+                emptyDiv.append(span);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            detailedEmptyMessage();
+        })
+    </script>
+
+</div>
