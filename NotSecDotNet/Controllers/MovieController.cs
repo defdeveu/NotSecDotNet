@@ -19,7 +19,6 @@ namespace NotSecDotNet.Controllers
         {
             _logger = logger;
             _dbContext = dbContext;
-            //DBInitializer.Initialize(dbContext);
         }
 
 

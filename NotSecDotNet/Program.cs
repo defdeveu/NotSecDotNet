@@ -19,6 +19,8 @@ builder.Services.AddAuthentication("cookie")
     .AddCookie("cookie");
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<MovieService>();
+builder.Services.AddScoped<SellMovieObjectsService>();
+
 
 var app = builder.Build();
 
