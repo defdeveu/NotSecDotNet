@@ -6,7 +6,8 @@
 3. [Accessing the API via  the browser using Swagger](#Postman)
 4. [Exercises](#Exercises)
     1.  [Exercise 1 - Find users of the app and their password](#Exercise_1)
-     1. [Exercise 3 - Change another user's password](#Exercise_3)
+    1. [Exercise 3 - Change another user's password](#Exercise_3)
+	1. [Exercise 4 - Buy cheaper](#Exercise_4)
 
 <a name="Introduction"></a>
 ## Introduction 
@@ -53,8 +54,6 @@ The application contains a password change functionality. Abuse it to change ano
 *URL*: /rest/user/password?user=Yoda&oldPassword=&lt;old_password&gt;&newPassword=&lt;new_password&gt;  
 *Response*:  Ok or Not ok  
 
-**Postman request**
-Change password
 
 **Detailed description**
 The change password service first creates a password-change xml to call a remote password change service with it (in reality the remote service does nothing remotely, just parses the xml and changes the password locally).  
@@ -67,3 +66,20 @@ public String createXml(ChangePasswordDto changePasswordDto)
         }
 ```
 After the exploit fix the vulnerability within the code.
+
+<a name="Exercise_4"></a>
+### Exercise 4 – Buy cheaper
+**Short Description**
+You can buy movie-related objects with the application. Each object have a name, a description and a price. Try to by something for cheaper than the original price!
+
+**Service endpoint**
+*Request Method*: PUT  
+*URL*: /rest/order  
+*Body*: a JSON string containing the order  
+	
+Response: a JSON containing the details of the order and the final price.
+	
+
+**Detailed description**
+Find a way to buy something for a cheaper price than intended!  
+After you found the vulerability, fix the code!
