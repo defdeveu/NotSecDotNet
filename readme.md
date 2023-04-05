@@ -139,7 +139,7 @@ Users of the app have tokens, that they can send to each-other. The send happens
 Check the code in `UserController.TransferToken`! What kind of problems do you notice? Try to prove, that there is really a vulerability here! It is OK to modify the code by adding some delay here or there to prove your theory. How could you fix this vulerability? 
 
 
-<a name="Exercise_6"></a>
+<a name="Exercise_7"></a>
 ### Exercise 7 – XSS
 
 **Short Description**
