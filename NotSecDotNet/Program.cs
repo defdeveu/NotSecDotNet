@@ -15,11 +15,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<MovieDbContext>(options => options.UseSqlite("Data Source=movie.db"));
+//builder.Services.AddDbContext<MovieDbContext>(options =>  options.UseMySQL("server=localhost;database=movie;user=root;password=root"));
 builder.Services.AddAuthentication("cookie")
     .AddCookie("cookie");
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<MovieService>();
 builder.Services.AddScoped<SellMovieObjectsService>();
+builder.Services.AddScoped<UserService>();
 
 
 var app = builder.Build();

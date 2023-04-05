@@ -15,9 +15,14 @@ namespace NotSecDotNet.Controllers
     {
 
         MovieDbContext movieDbContext;
-        public UserController(MovieDbContext movieDbContext)
+        private readonly ILogger<UserController> logger;
+        private readonly UserService userService;
+
+        public UserController(MovieDbContext movieDbContext, ILogger<UserController> logger, UserService userService)
         {
             this.movieDbContext = movieDbContext;
+            this.logger = logger;
+            this.userService = userService;
         }
 
         [Route("user/password")]
@@ -45,7 +50,6 @@ namespace NotSecDotNet.Controllers
             string loggedinuser = HttpContext.User.FindFirstValue("username");
             if(loggedinuser == userName)
             {
-                UserService userService = new UserService(movieDbContext);
                 User u = userService.FindUserByName(userName);
                 if(u != null)
                 {
@@ -54,6 +58,30 @@ namespace NotSecDotNet.Controllers
             }
             HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
             return Results.Unauthorized();
+        }
+
+        [Route("mytokens")]
+        [HttpGet]
+        public TokenAccount MyTokens()
+        {
+            int loggedinuserId = Int16.Parse(HttpContext.User.FindFirstValue("userId"));
+            return userService.FindTokenAccount(loggedinuserId);
+        }
+
+        [Route("transfertoken")]
+        [HttpPut]
+        public IResult TransferToken([FromBody] TransferDto transferDto)
+        {
+            int loggedinuserId = Int16.Parse(HttpContext.User.FindFirstValue("userId"));
+            var ret = userService.TransferToken(loggedinuserId, transferDto.ToUser, transferDto.Amount);
+            if (ret)
+            {
+                return Results.Ok("Token transferred");
+            }
+            else
+            {
+                return Results.Ok("Token not transferred");
+            }
         }
     }
 }

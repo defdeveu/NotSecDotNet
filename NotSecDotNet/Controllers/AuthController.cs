@@ -17,17 +17,18 @@ namespace NotSecDotNet.Controllers
     public class AuthController : ControllerBase
     {
         private readonly MovieDbContext dbContext;
+        private readonly UserService userService;
 
-        public AuthController(MovieDbContext dbContext)
+        public AuthController(MovieDbContext dbContext, UserService userService)
         {
             this.dbContext = dbContext;
+            this.userService = userService;
         }
 
         [Route("login")]
         [HttpPost]
         public async Task<IResult> Login(LoginDto login)
         {
-            UserService userService = new UserService(dbContext);
             User? user = userService.FindUserByName(login.UserName);
             if(user != null)
             {
@@ -37,7 +38,8 @@ namespace NotSecDotNet.Controllers
                     {
                         new Claim("username", login.UserName),
                         new Claim("sex", user.Sex ?? ""),
-                        new Claim("email", user.EmailAddress ?? "")
+                        new Claim("email", user.EmailAddress ?? ""),
+                        new Claim("userId", user.Id.ToString())
                     };
                     ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);

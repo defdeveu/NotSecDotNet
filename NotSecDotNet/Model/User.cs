@@ -21,5 +21,7 @@ namespace NotSecDotNet.Model
         public string? Motto { get; set; }
 
         public string? WebPageUrl { get; set; }
+
+        public TokenAccount? token { get; set; }
     }
 }
