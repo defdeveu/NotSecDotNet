@@ -45,8 +45,6 @@ namespace NotSecDotNet.Services
             {
                 return false;
             }
-            logger.LogInformation("From account's balance is: {balance}", fromAccount.Amount);
-            Thread.Sleep(10_000);
             TokenAccount toAccount = movieDbContext.TokenAccounts.Single(ta => ta.Id == destUser.Id);
             if(fromAccount.Amount > amount)
             {
