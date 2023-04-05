@@ -9,6 +9,8 @@
     1. [Exercise 3 - Change another user's password](#Exercise_3)
 	1. [Exercise 4 - Buy cheaper](#Exercise_4)
 	1. [Exercise 5 – Check the authentication](#Exercise_5)
+	1. [Exercise 6 – Find concurrency problems](#Exercise_6)
+	1. [Exercise 7 – XSS](#Exercise_7)
 
 <a name="Introduction"></a>
 ## Introduction 
@@ -107,3 +109,46 @@ Check that all of this works as intended.
 What kind of authentication does application use?
 Have a look at the AuthController class. Can you find any problems with this implementation? Name them? 
 How would you fix the found problems (if there are any)?
+
+<a name="Exercise_6"></a>
+### Exercise 6 – Find concurrency problems
+
+**Short Description**
+Users of the app have tokens, that they can send to each-other. Hack the token-transfer endpoint!
+
+**Service endpoint**
+*Request Method*: PUT  
+*URL*: /transfertoken/  
+*Body*: a JSON string liket this 
+```
+{
+  "toUser": "Princess Leia",
+  "amount": 10
+}
+```  
+
+*Request Method*: GET  
+*URL*: /mytokens/  
+*Result*: give info about the logged in user's tokens
+	
+Response: a JSON containing the username or errorcode
+	
+
+**Detailed description**
+Users of the app have tokens, that they can send to each-other. The send happens through the transfertoken endpoint, it sends from the logged in user to the `toUser` of the request and the amount specified (if it is available on the logged in user's account).
+Check the code in `UserController.TransferToken`! What kind of problems do you notice? Try to prove, that there is really a vulerability here! It is OK to modify the code by adding some delay here or there to prove your theory. How could you fix this vulerability? 
+
+
+<a name="Exercise_6"></a>
+### Exercise 7 – XSS
+
+**Short Description**
+The app has one page, but alas, that one is vulnerable to XSS. Find it and fix it!
+
+**URL of the page**
+https://localhost:7018/ 
+	
+
+**Detailed description**
+
+At the above URL you will find a movie-search page. You already know from Exercise 1, that this functionality is vulnerable. But your job now is to find and XSS on this page. What kind of XSS is this? Check the source code! Fix it!
